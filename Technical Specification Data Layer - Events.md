@@ -78,6 +78,7 @@ window.mkorsData = {
   ]
 };
 ```
+
 **Notes**
 
 1. `mkorsData.page.siteType` will have no purpose once the site is fully responsive and if the Destination Kors site goes away. Set to `responsive:ecommerce` for site redesign (PDP, PLP, SERP, Home).
@@ -927,34 +928,46 @@ var ddAddToCartEvent = {
       lookID: "",
       mfr: "MICHAEL Michael Kors",
       mfrItemNum: "32T9UF5C2Y",
-pricePer: "198.00",
-priceType: "List",
-productID: "287781019",
-quantity: 1,
-shippingMethod: "pickup",
-storeID: "637",
-upc: "192877810193",
-storeName: "MICHAEL KORS TACOMA", // when added to pick up in store   engraved: "true", // "true" or "false" if the product is engraved   monogrammed: "false" // "true" or "false" if the product is monogrammed 
-}, {
-    basePrice: "45.0",
-crossSellCartridge: "",
-gwp: "N",
- gwpSku: "",
- isBaseItem: false,
-isCrossSell: "N",
-lookID: ""   mfr: "Michael Kors",
-mfrItemNum: "CB94C6LEX8",
-pricePer: "25.0",
-priceType: "Markdown",
- productID: "831879150",
-quantity: 1,
-shippingMethod: "pickup",
-storeID: "637",
-upc: "192877810193",
-storeName: "MICHAEL KORS TACOMA", // when added to pick up in store   engraved: "true", // "true" or "false" if the product is engraved   monogrammed: "false" // "true" or "false" if the product is monogrammed 
-} ]};
+      pricePer: "198.00",
+      priceType: "List",
+      productID: "287781019",
+      quantity: 1,
+      shippingMethod: "pickup",
+      storeID: "637",
+      upc: "192877810193",
+      storeName: "MICHAEL KORS TACOMA", // when added to pick up in store
+      engraved: "true", // "true" or "false" if the product is engraved
+      monogrammed: "false" // "true" or "false" if the product is monogrammed 
+    },
+    {
+      basePrice: "45.0",
+      crossSellCartridge: "",
+      gwp: "N",
+      gwpSku: "",
+      isBaseItem: false,
+      isCrossSell: "N",
+      lookID: ""
+      mfr: "Michael Kors",
+      mfrItemNum: "CB94C6LEX8",
+      pricePer: "25.0",
+      priceType: "Markdown",
+      productID: "831879150",
+      quantity: 1,
+      shippingMethod: "pickup",
+      storeID: "637",
+      upc: "192877810193",
+      storeName: "MICHAEL KORS TACOMA", // when added to pick up in store
+      engraved: "true", // "true" or "false" if the product is engraved
+      monogrammed: "false" // "true" or "false" if the product is monogrammed 
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddAddToCartEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddAddToCartEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent('addToCart');
 ```
@@ -989,8 +1002,7 @@ var ddRemoveFromCartEvent = {
       gwp: "N",
       gwpSku: "",
       quantity: 2
-   
-}
+    }
   ]
 };
 
@@ -1011,42 +1023,52 @@ Executed anywhere the user chooses to add item(s) to the wishlist. This can happ
 // create object with eventInfo and product object
 var ddAddToWishListEvent = {
   eventInfo: {
-   eventName: "addToWishList",
-  type: "wishList",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, product: [ // array of product objects  {
-    productID: "831879309",
-pricePer: 145.0,
-basePrice: 145.0,
-priceType: "List",
- mfr: "Michael Kors",
-mfrItemNum: "CB99A5G0UK",
-upc: "888318793094",
-isBaseItem: true,
-  outfitID:  "28415181",
-monogrammed: false,
- gwp: "N",
- gwpSku: "",
- quantity: 2 
-}, {
-    productID: "831879150",
-pricePer: 25.0,
-basePrice: 45.0,
-priceType: "Markdown",
- mfr: "Michael Kors",
-mfrItemNum: "CB94C6LEX8",
-upc: "888318791502",
-isBaseItem: true,
- outfitID:  "28415181",
-monogrammed: false,
-gwp: "N",
- gwpSku: "",
- quantity: 1 ]};
+    eventName: "addToWishList",
+    type: "wishList",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  product: [ // array of product objects
+    {
+      productID: "831879309",
+      pricePer: 145.0,
+      basePrice: 145.0,
+      priceType: "List",
+      mfr: "Michael Kors",
+      mfrItemNum: "CB99A5G0UK",
+      upc: "888318793094",
+      isBaseItem: true,
+      outfitID:  "28415181",
+      monogrammed: false,
+      gwp: "N",
+      gwpSku: "",
+      quantity: 2 
+    },
+    {
+      productID: "831879150",
+      pricePer: 25.0,
+      basePrice: 45.0,
+      priceType: "Markdown",
+      mfr: "Michael Kors",
+      mfrItemNum: "CB94C6LEX8",
+      upc: "888318791502",
+      isBaseItem: true,
+      outfitID:  "28415181",
+      monogrammed: false,
+      gwp: "N",
+      gwpSku: "",
+      quantity: 1
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddAddToWishListEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddAddToWishListEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent('addToWishList');
 ```
@@ -1058,28 +1080,37 @@ Executed anywhere the user chooses to remove item(s) from the wishlist. This can
 // create object with eventInfo and product object
 var ddRemoveFromWishListEvent = {
   eventInfo: {
-   eventName: "removeFromWishList",
-  type: "wishList",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, product: [ // array of product objects  {
-    productID: 831879150,
-pricePer: 125.0,
-mfr: Michael Kors Mens,
-mfrItemNum: CB94C6LEX8,
-upc: 888318791502,
-quantity: 1 
-} ]};
+    eventName: "removeFromWishList",
+    type: "wishList",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  product: [ // array of product objects
+    {
+      productID: 831879150,
+      pricePer: 125.0,
+      mfr: Michael Kors Mens,
+      mfrItemNum: CB94C6LEX8,
+      upc: 888318791502,
+      quantity: 1 
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddRemoveFromWishListEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddRemoveFromWishListEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent('removeFromWishList');
 ```
 
 ## customEvent - Add to Favorites (EU Only)
-Executed anywhere the user chooses to add item(s) to the favorites. This can happen from product detail pages, quickview pages, shopping cart, or as a result of a quantity update on the favorites itself page. Any other places that cause an item or items to be added to the favorites should follow this pattern. In the case of an update to an item that changes from one Fabric/Color to another, there will be both a favorites remove and a favorites add. 
+Executed anywhere the user chooses to add item(s) to the favorites. This can happen from product detail pages, quickview pages, shopping cart, or as a result of a quantity update on the favorites itself page. Any other places that cause an item or items to be added to the favorites should follow this pattern. In the case of an update to an item that changes from one Fabric/Color to another, there will be both a favorites remove and a favorites add.
+
 4/21/17 - Add to Favorites functionality should be replaced at some point by Add to Wishlist. Favorites is still on EU sites, but we expect a move to Wish list globally. Assuming this is true, we wouldn’t want to spend time on this.
 
 ```javascript
@@ -1087,42 +1118,52 @@ Executed anywhere the user chooses to add item(s) to the favorites. This can hap
 // create object with eventInfo and product object
 var ddAddToFavoritestEvent = {
   eventInfo: {
-   eventName: "addToFavorites",
-  type: "favorites",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, product: [ // array of product objects  {
-    productID: "831879309",
-pricePer: 145.0,
-basePrice: 145.0,
-priceType: "List",
- mfr: "Michael Kors",
-mfrItemNum: "CB99A5G0UK",
-upc: "888318793094",
-isBaseItem: true,
-  outfitID:  "28415181",
-monogrammed: false,
- gwp: "N",
- gwpSku: "",
- quantity: 2 
-}, {
-    productID: "831879150",
-pricePer: 25.0,
-basePrice: 45.0,
-priceType: "Markdown",
- mfr: "Michael Kors",
-mfrItemNum: "CB94C6LEX8",
-upc: "888318791502",
-isBaseItem: true,
- outfitID:  "28415181",
-monogrammed: false,
-gwp: "N",
- gwpSku: "",
- quantity: 1 ]};
+    eventName: "addToFavorites",
+    type: "favorites",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  product: [ // array of product objects
+    {
+      productID: "831879309",
+      pricePer: 145.0,
+      basePrice: 145.0,
+      priceType: "List",
+      mfr: "Michael Kors",
+      mfrItemNum: "CB99A5G0UK",
+      upc: "888318793094",
+      isBaseItem: true,
+      outfitID:  "28415181",
+      monogrammed: false,
+      gwp: "N",
+      gwpSku: "",
+      quantity: 2 
+    },
+    {
+      productID: "831879150",
+      pricePer: 25.0,
+      basePrice: 45.0,
+      priceType: "Markdown",
+      mfr: "Michael Kors",
+      mfrItemNum: "CB94C6LEX8",
+      upc: "888318791502",
+      isBaseItem: true,
+      outfitID:  "28415181",
+      monogrammed: false,
+      gwp: "N",
+      gwpSku: "",
+      quantity: 1
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddAddToFavoritesEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddAddToFavoritesEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent('addToFavorites');
 ```
@@ -1134,26 +1175,33 @@ Executed anywhere the user chooses to remove item(s) from the favorites. This ca
 // create object with eventInfo and product object
 var ddRemoveFromFavoritesEvent = {
   eventInfo: {
-   eventName: "removeFromFavorites",
-  type: "favorites",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, product: [ // array of product objects  {
-    productID: 831879150,
-pricePer: 125.0,
-mfr: Michael Kors Mens,
-mfrItemNum: CB94C6LEX8,
-upc: 888318791502,
-quantity: 1 
-} ]};
+    eventName: "removeFromFavorites",
+    type: "favorites",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  product: [ // array of product objects
+    {
+      productID: "831879150",
+      pricePer: 125.0,
+      mfr: "Michael Kors Mens",
+      mfrItemNum: "CB94C6LEX8",
+      upc: "888318791502",
+      quantity: 1
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddRemoveFromFavoritesEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddRemoveFromFavoritesEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent('removeFromFavorites');
 ```
-
 
 ## customEvent - Sign In Success
 Executed when a customer successfully signs in to an existing account. 
@@ -1162,27 +1210,43 @@ Executed when a customer successfully signs in to an existing account.
 // create object with eventInfo and product object
 var ddSignInSuccessEvent = {
   eventInfo: {
-   eventName: "signInSuccess",
-  type: "account",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, user: [{
-  // future object for carrying user info. Later in 2017.  profile: [{
-    profileInfo: {
-     customerType: "Customer", //"Customer", "Employee", "Associate"    type: "registered", //"guest", "registered", "loyalist"    loginStatus: "logged In", //"logged in", "logged out"    // string indication of tier - set to "down" if 500 friends service is unavailable    loyaltyTier: "studio", //"backstage","runway", "red carpet", "non-loyalty"    hashedID: "7ddb5eae16468674b843f396b335a7dd" // md5 hash of email address   
-} 
-}]
-}]};
+    eventName: "signInSuccess",
+    type: "account",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            type: "registered", // "guest", "registered", "loyalist"
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd" // md5 hash of email address   
+          }
+        }
+      ]
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddSignInSuccessEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddSignInSuccessEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent("signInSuccess");
 ```
 
-**Notes:** 
-The hashedID in the user[n].profile[n] object is a one-way hash of the customer’s email address. This value is fed into the analytics data stream (and also into a few marketing pixels) for the purpose of visitor stitching across devices and back-end matching of online data to CRM data. 
+**Notes:**
+The hashedID in the `user[n].profile[n]` object is a one-way hash of the customer’s email address. This value is fed into the analytics data stream (and also into a few marketing pixels) for the purpose of visitor stitching across devices and back-end matching of online data to CRM data.
+
 The algorithm used for hashing is up to Michael Kors and the same algorithm must be used in all back-end systems in order for matching to work. Whatever the hashing (or encryption) process, be sure to standardize the plain-text email address format before processing; This means forcing the string to lowercase and encode special characters (if any).  Also, be certain to document the full process and follow it to the letter on all systems that will convert customer ID’s (email or otherwise) into hashed or encrypted keys.
 
 ## customEvent - Account Creation Success
@@ -1192,21 +1256,38 @@ Executed when a customer successfully creates an account.
 // create object with eventInfo and product object
 var ddAccountCreationSuccessEvent = {
   eventInfo: {
-   eventName: "accountCreationSuccess",
-  type: "account",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, user: [{
-  // future object for carrying user info. Later in 2017.  profile: [{
-    profileInfo: {
-     customerType: "Customer", //"Customer", "Employee", "Associate"    type: "registered", //"guest", "registered", "loyalist"    loginStatus: "logged In", //"logged in", "logged out"    // string indication of tier - set to "down" if 500 friends service is unavailable    loyaltyTier: "studio", //"backstage","runway", "red carpet", "non-loyalty"    hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address     emailOptIn: true, // Indicates whether this account is opted in for emails    loyaltyOptIn: true // Indicates whether this account is opted in for VIP  
-} 
-}]
-}]};
+    eventName: "accountCreationSuccess",
+    type: "account",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            type: "registered", // "guest", "registered", "loyalist"
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            emailOptIn: true, // Indicates whether this account is opted in for emails
+            loyaltyOptIn: true // Indicates whether this account is opted in for VIP  
+          } 
+        }
+      ]
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddAccountCreationSuccessEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddAccountCreationSuccessEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent("accountCreationSuccess");
 ```
@@ -1221,21 +1302,37 @@ Executed when an existing registered customer successfully joins the loyalty pro
 // create object with eventInfo and product object
 var ddLoyaltySignupSuccessEvent = {
   eventInfo: {
-   eventName: "loyaltySignupSuccess",
-  type: "account",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, user: [{
-  // future object for carrying user info. Later in 2017.  profile: [{
-    profileInfo: {
-     customerType: "Customer", //"Customer", "Employee", "Associate"    type: "registered", //"guest", "registered", "loyalist"    loginStatus: "logged In", //"logged in", "logged out"    // string indication of tier - set to "down" if 500 friends service is unavailable    loyaltyTier: "studio", //"backstage","runway", "red carpet"    hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address     emailOptIn: true // Indicates whether this account is opted in for emails  
-} 
-}]
-}]};
+    eventName: "loyaltySignupSuccess",
+    type: "account",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            type: "registered", // "guest", "registered", "loyalist"
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            emailOptIn: true // Indicates whether this account is opted in for emails
+          } 
+        }
+      ]
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddLoyaltySignupSuccessEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddLoyaltySignupSuccessEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent("loyaltySignupSuccess");
 ```
@@ -1247,21 +1344,37 @@ Executed when an existing registered loyalist successfully leaves the loyalty pr
 // create object with eventInfo and product object
 var ddLoyaltyOptOutpSuccessEvent = {
   eventInfo: {
-   eventName: "loyaltyOptOutSuccess",
-  type: "account",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}, user: [{
-  // future object for carrying user info. Later in 2017.  profile: [{
-    profileInfo: {
-     customerType: "Customer", //"Customer", "Employee", "Associate"    type: "registered", //"guest", "registered", "loyalist"    loginStatus: "logged In", //"logged in", "logged out"    // string indication of tier - set to "down" if 500 friends service is unavailable    loyaltyTier: "studio", //"backstage","runway", "red carpet"    hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address     emailOptIn: true // Indicates whether this account is opted in for emails  
-} 
-}]
-}]};
+    eventName: "loyaltyOptOutSuccess",
+    type: "account",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  },
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            type: "registered", // "guest", "registered", "loyalist"
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            emailOptIn: true // Indicates whether this account is opted in for emails
+          } 
+        }
+      ]
+    }
+  ]
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddLoyaltyOptOutpSuccessEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddLoyaltyOptOutpSuccessEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent("loyaltyOptOutSuccess");
 ```
@@ -1273,15 +1386,20 @@ Executed when a customer submitted email is successfully subscribed. This event 
 // create object with eventInfo and product object
 var ddEmailSubscriptionSuccessEvent = {
   eventInfo: {
-   eventName: "emailSubscriptionSuccess",
-  type: "account",
-  timeStamp: new Date(),
-  processed: {
-    adobeAnalytics: false // Launch will change this to true once processed 
-}
-}};
+    eventName: "emailSubscriptionSuccess",
+    type: "account",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
+    }
+  }
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddEmailSubscriptionSuccessEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddEmailSubscriptionSuccessEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent("emailSubscriptionSuccess");
 ```
@@ -1309,9 +1427,16 @@ var ddErrorEvent = {
         errorType: "emailSubscription",
         errorCode: "EM-22", // If possible. Allows for language neutral reporting
         errorMessage: "Email Address is already subscribed." // Not needed if errorCode exists
-}]}};
+      }
+    ]
+  }
+};
+
 // Push it onto the event array on mkorsData object
-window.mkorsData = window.mkorsData || {};window.mkorsData.event = window.mkorsData.event || [];window.mkorsData.event.push(ddErrorEvent);
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddErrorEvent);
+
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent("errorEvent");
 ```
@@ -1331,10 +1456,10 @@ In addition to the normal `error` object, this event will carry a `product` arra
 var ddErrorEvent = {
   eventInfo: {
     eventName: "errorEventOrderSubmit",
-      type: "customer facing error",
-      timeStamp: new Date(),
-      processed: {
-        adobeAnalytics: false // Launch will change this to true once processed 
+    type: "customer facing error",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed 
     },
     error: [
       {
