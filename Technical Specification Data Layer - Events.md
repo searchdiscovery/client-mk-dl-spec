@@ -17,8 +17,6 @@ Search Discovery Inc.
 
 ## Table of Contents
 
-- [Technical Specification: Data Layer - Events](#technical-specification-data-layer---events)
-  - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [Data Layer Rendering and Timing Considerations](#data-layer-rendering-and-timing-considerations)
 - [Page Load Tracking](#page-load-tracking)
