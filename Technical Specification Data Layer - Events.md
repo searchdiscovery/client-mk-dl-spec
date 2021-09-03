@@ -1,19 +1,66 @@
 ![SDI logo](https://lh5.googleusercontent.com/qISy6cadFd9w5RbPc1eqZj7SISc844g8KRXSeM2P07h1PvkDJbpVtE--xNttLLSvlklK7e5dr52fGGuTGQZ19CqrLeg0dr7UuisKnKUK0xxs6IP8LfnsPMkBkfLeQfUMABH-cJn7=s0)
 
 # Technical Specification: Data Layer - Events
-Designed for sites:\
+Designed for sites:  
 Michael Kors US/CA, Europe and future redesign
 
-Created By:\
-Stewart Schilling, Analytics Architect\
+Created By:  
+Stewart Schilling, Analytics Architect  
 Search Discovery Inc.
 
-| Date | Revision | Notes |
-| ---- | -------- | ----- |
-|11/11/2016|Version 1.1||
-|4/6/2017|Version 1.2|Updated against actual usage|
-|11/21/2019|Version 1.3|Updated to include dataLayerReady custom event|
-|8/24/2021|Version 1.4|Merge in changes from other docs, current prod, convert to MD|
+| Date       | Revision    | Notes                                                         |
+| ---------- | ----------- | ------------------------------------------------------------- |
+| 11/11/2016 | Version 1.1 |                                                               |
+| 4/6/2017   | Version 1.2 | Updated against actual usage                                  |
+| 11/21/2019 | Version 1.3 | Updated to include dataLayerReady custom event                |
+| 8/24/2021  | Version 1.4 | Merge in changes from other docs, current prod, convert to MD |
+
+## Table of Contents
+
+- [Technical Specification: Data Layer - Events](#technical-specification-data-layer---events)
+  - [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+  - [Data Layer Rendering and Timing Considerations](#data-layer-rendering-and-timing-considerations)
+- [Page Load Tracking](#page-load-tracking)
+  - [Page Load Tracking - All Pages](#page-load-tracking---all-pages)
+  - [Page Load - Product Detail Pages](#page-load---product-detail-pages)
+  - [Page Load - Product Listing Pages](#page-load---product-listing-pages)
+  - [Page Load - Shopping Cart Page](#page-load---shopping-cart-page)
+  - [Page Load - Checkout Pages](#page-load---checkout-pages)
+  - [Page Load - Order Confirmation Page](#page-load---order-confirmation-page)
+- [Custom Events](#custom-events)
+  - [Event Information](#event-information)
+    - [Creating and Dispatching Custom Events](#creating-and-dispatching-custom-events)
+    - [Exposing Data to Launch](#exposing-data-to-launch)
+  - [customEvent - Quick View](#customevent---quick-view)
+  - [customEvent - Color Selection on PDP, QV, (and PLP in redesign)](#customevent---color-selection-on-pdp-qv-and-plp-in-redesign)
+  - [customEvent - Size Selection on PDP, QV](#customevent---size-selection-on-pdp-qv)
+  - [customEvent - Share Product](#customevent---share-product)
+  - [customEvent - PLP Refinements](#customevent---plp-refinements)
+  - [customEvent - Add to Cart](#customevent---add-to-cart)
+  - [customEvent - Remove from Cart](#customevent---remove-from-cart)
+  - [customEvent - Pick Up In Store Search](#customevent---pick-up-in-store-search)
+  - [customEvent - Add to Wishlist](#customevent---add-to-wishlist)
+  - [customEvent - Remove from Wishlist](#customevent---remove-from-wishlist)
+  - [customEvent - Add to Favorites (EU Only)](#customevent---add-to-favorites-eu-only)
+  - [customEvent - Remove from Favorites (EU Only)](#customevent---remove-from-favorites-eu-only)
+  - [customEvent - Sign In Success](#customevent---sign-in-success)
+  - [customEvent - Account Creation Success](#customevent---account-creation-success)
+  - [customEvent - Loyalty Sign Up Success](#customevent---loyalty-sign-up-success)
+  - [customEvent - Loyalty Opt Out Success](#customevent---loyalty-opt-out-success)
+  - [customEvent - Email Subscription Success](#customevent---email-subscription-success)
+  - [customEvent - Product Quantity Update](#customevent---product-quantity-update)
+  - [customEvent - Promo Code Applied](#customevent---promo-code-applied)
+  - [customEvent - Quantity Selection](#customevent---quantity-selection)
+  - [customEvent - Image Interaction](#customevent---image-interaction)
+  - [customEvent - Errors](#customevent---errors)
+  - [customEvent - Order Submit Errors](#customevent---order-submit-errors)
+  - [customEvent - Shop Local](#customevent---shop-local)
+  - [Single Page Applications – Page Change](#single-page-applications--page-change)
+  - [customEvent – Data Layer Complete](#customevent--data-layer-complete)
+- [Testing and Debugging](#testing-and-debugging)
+- [Appendix](#appendix)
+  - [IE8 event polyfill](#ie8-event-polyfill)
 
 ***
 
@@ -33,7 +80,7 @@ It is perfectly OK to build the `mkorsData` object in multiple inline scripts as
 
 In some cases, it may be necessary to provide some static parts of the `mkorsData` object as part of cached components or cached HTML while providing other, more dynamic data via AJAX calls or similar technologies. This is often true of user profile information, or e-commerce cart info. In these cases, it’s just fine to populate the core of the `mkorsData` object from cached inline JS and the dynamic portions from asynchronous (or synchronous) request / responses.  The guidance still applies that the data must exist in the `mkorsData` object when or before Adobe Launch expects it to be there. In the case of data provided by asynchronous methods, we may need to have Adobe Launch wait for a notification before processing data. See [Custom Events](#custom-events) below for more on this.
 
-If it is not possible to fully create the data layer prior to the Adobe Launch embed code, it is vital that the data layer is fully created prior to dispatching the `dataLayerReady` custom event found in the [customEvent - Data Layer Complete](#customevent-data-layer-complete) section towards the end of this document.
+If it is not possible to fully create the data layer prior to the Adobe Launch embed code, it is vital that the data layer is fully created prior to dispatching the `dataLayerReady` custom event found in the [customEvent - Data Layer Complete](#customevent--data-layer-complete) section towards the end of this document.
 
 # Page Load Tracking
 ## Page Load Tracking - All Pages
@@ -63,14 +110,14 @@ window.mkorsData = {
       profile: [
         {
           profileInfo: {
+            applePayEnabled: "true" // true or false (added for ECB-13327)
             customerType: "Customer", // "Customer", "Employee", "Associate"
-            type: "registered", // "guest", "registered", "loyalist"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4", // sha256 hash of email address
             loginStatus: "logged In", // "logged in", "logged out"
             // string indication of tier - set to "down" if 500 friends service is unavailable
             loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
-            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
-            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4", // sha256 hash of email address
-            applePayEnabled: "true" // true or false (added for ECB-13327)
+            type: "registered", // "guest", "registered", "loyalist"
           }
         }
       ]
@@ -97,6 +144,7 @@ window.mkorsData = {
     channel: "HANDBAGS",
     countryLanguage: "US:en",
     name: "Home > HANDBAGS > SHOULDER BAGS > SloanTangoSmallQuilted-LeatherShoulderBag",
+    navigation: "MK:Top Nav > WOMEN > HANDBAGS > SHOULDER BAGS",
     region: "NA",
     responsiveView: "large",
     siteSectionLevel2: "Home > HANDBAGS",
@@ -208,12 +256,17 @@ Product Listing Pages include product listings as a result of category navigatio
 window.mkorsData = {
   page: {
     atgCategoryID: "cat20126",
+    breadcrumb: "/shoes/ankle-boots/_/N-180msnr",
     channel: "SHOES",
     countryLanguage: "US:en",
+    currencyCode: "USD",
+    dmpCategory: "Ankle Boots",
     merchCategoryLevel1: "SHOES",
     merchCategoryLevel2: "Home > SHOES > ANKLE BOOTS",
     merchCategoryLevel3: "Home > SHOES > ANKLE BOOTS",
     name: "Home > SHOES > ANKLE BOOTS",
+    navigation: "MK:Top Nav > SHOES > ANKLE BOOTS",
+    region: "US",
     responsiveView: "large",
     siteSectionLevel2: "Home > SHOES",
     siteSectionLevel3: "Home > SHOES > ANKLE BOOTS",
@@ -249,8 +302,7 @@ window.mkorsData = {
     query: "", // set to the search keyword if listing is a search result
     queryReplaced: "" // set to the replaced search keyword if listing is a search result
   },
-  user: [{
-  /*future object for carrying user info. Later in 2017.*/ }]
+  user: [{ /*future object for carrying user info. Later in 2017.*/ }]
 }
 ```
 **Notes**
@@ -259,12 +311,15 @@ It is desirable to have sorting and refinement information provided in English r
 
 ## Page Load - Shopping Cart Page
 The Shopping Cart Page will have the following data layer JSON object.
+
 ```javascript
 // mkorsData page load info for Shopping Cart page
 window.mkorsData = {
   page: {
+    breadcrumb: "/checkout/shoppingCart.jsp",
     channel: "Shopping Cart",
     countryLanguage: "US:en",
+    currency: "USD",
     name: "Shopping Cart",
     siteSectionLevel2: "Shopping Cart",
     siteSectionLevel3: "Shopping Cart",
@@ -273,70 +328,57 @@ window.mkorsData = {
     type: "Shopping Cart"
   },
   cart: {
-    orderType: "regular", // "regular" or "preorder" depending on order type
     product: [
       {
-        productID: "831879309",
-        pricePer: 145.0,
-        basePrice: 145.0,
-        priceType: "List",
-        mfr: "Michael Kors",
-        mfrItemNum: "CB99A5G0UK",
-        upc: "888318793094",
-        outfitID: "28415181",
+        available: "Y",
+        basePrice: "145.0",
+        category: "Boots",
+        categoryID: "cat20125",
+        color: "BROWN",
+        crossSellCartridge: "",
         customized: "false",
-        isBaseItem: "",
+        engraved: "false" // "true" or "false" if a product is engraved
         gwp: "N",
         gwpSku: "",
-        quantity: 2,
+        isBaseItem: "",
+        isCrossSell: "N",
+        mfr: "Michael Kors",
+        mfrItemNum: "CB99A5G0UK",
+        monogrammed: "true",
+        name: "KekeExtremeLogoTapeBoot",
+        orderType: "regular", // "regular" or "preorder" depending on order type
+        outfitID: "28415181",
         pickUpInStore: "N",
         pickUpStoreID: "",
         pickUpStoreName: "",
-        available: "Y",
-        monogrammed: "true",
-        engraved: "false" // "true" or "false" if a product is engraved
-      },
-      {
-        productID: "831879150",
-        pricePer: 25.0,
-        basePrice: 45.0,
-        priceType: "Markdown",
-        mfr: "Michael Kors",
-        mfrItemNum: "CB94C6LEX8",
-        upc: "888318791502",
-        outfitID: "28415181",
-        customized: "true",
-        isBaseItem: "true",
-        gwp: "N",
-        gwpSku: "",
-        quantity: 1,
-        pickUpInStore: "Y",
-        pickUpStoreID: "abcd1234",
-        pickUpStoreName: "MICHAEL KORS TACOMA",
-        available: "Y",
-        monogrammed: "true",
-        engraved: "false" // "true" or "false" if a product is engraved
+        pricePer: "145.0",
+        priceType: "List",
+        productID: "831879309",
+        qty: "2",
+        size: "US 9",
+        sku: "551269803",
+        upc: "888318793094",
       }
     ]
   },
   crossSellGroup: [
     {
-      strategy: "You may also like",
-      productCount: 4,
       product: [
         {
-          productID: "13452115",
+          displayIndex: 1
           mfr: "Michael Kors Studio",
           mfrItemNum: "30H6SOAL2L",
-          displayIndex: 1
+          productID: "13452115",
         },
         {
-          productID: "134521755",
+          displayIndex: 2
           mfr: "Michael Kors",
           mfrItemNum: "10X6SOAL34",
-          displayIndex: 2
+          productID: "134521755",
         }
-      ]
+      ],
+      productCount: 4,
+      strategy: "You may also like"
     },
     {
       strategy: "Recently Viewed",
@@ -353,6 +395,7 @@ window.mkorsData = {
   ]
 }
 ```
+
 **Notes:** 
 
 1. Present Launch page load is scraping the DOM to align price info with products in the data layer. It’s super fragile and WILL break.
@@ -458,57 +501,36 @@ window.mkorsData = {
   ]
 };
 ```
+
 **Notes:** 
+
 ## Page Load - Order Confirmation Page
 The Order Confirmation Page will have the following data layer JSON object.
 ```javascript
 // mkorsData page load info for Order Confirmation page
 window.mkorsData = {
   page: {
-    name: "checkout:confirmation",
     channel: "checkout",
     countryLanguage: "US:en",
-    type: "checkout:confirmation",
+    name: "checkout:confirmation",
+    responsiveView: "medium"
     siteSectionLevel2: "checkout:confirmation",
     siteSectionLevel3: "checkout:confirmation",
     siteType: "desktop:ecommerce",
-    responsiveView: "medium"
+    type: "checkout:confirmation",
   },
-  user: [
-    {
-      profile: [
-        {
-          profileInfo: {
-            type: "registered",
-            loginStatus: "logged in",
-            loyaltyTier: "NA",
-            hashedID: "7a8e1e3e9a2116bd77e4f92ed60b1ae7",
-            applePayEnabled: "true" // true or false (added for ECB-13327)
-          }
-        }
-      ]
-    }
-  ],
   transaction: {
+    billingCountry: "US",
+    billingState: "WI",
+    billingZipCode: "53533-8825",
+    currency: "USD",
+    customerID: "13466870",
+    customerType: "0",
+    nonProductGwp: "",
+    orderDiscountAmount: "0.00",
     orderID: "w8244902",
     orderType: "regular", // "regular" or "preorder" depending on order type
     paymentMethod: "visa",
-    shippngMethod: "Ground Shipping",
-    billingState: "WI",
-    billingZipCode: "53533-8825",
-    shippingState: "WI",
-    shippingZipCode: "53533-8825",
-    billingCountry: "US",
-    shippingCountry: "US",
-    customerID: "13466870",
-    customerType: "0",
-    currency: "USD",
-    salesTax: "24.53",
-    shippingCity: "DODGEVILLE",
-    shippingCost: "0.0",
-    shippingType: "GROUND",
-    orderDiscountAmount: "0.00",
-    nonProductGwp: "",
     product: [
       {
         color: "ELECTRIC BLUE",
@@ -597,8 +619,31 @@ window.mkorsData = {
         monogrammed: "true",
         engraved: "false" // "true" or "false" if a product is engraved
       }
-    ]
-  }
+    ],
+    salesTax: "24.53",
+    shippingCity: "DODGEVILLE",
+    shippingCost: "0.0",
+    shippingCountry: "US",
+    shippingMethod: "Ground Shipping",
+    shippingState: "WI",
+    shippingType: "GROUND"
+    shippingZipCode: "53533-8825",
+  },
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            applePayEnabled: "true", // true or false (added for ECB-13327)
+            hashedID: "7a8e1e3e9a2116bd77e4f92ed60b1ae7",
+            loginStatus: "logged in",
+            loyaltyTier: "NA",
+            type: "registered",
+          }
+        }
+      ]
+    }
+  ],
 };
 ```
 **Notes:** 
@@ -834,7 +879,8 @@ var ddShareProductEvent = {
     }
   ],
   socialMedia: {
-    channel: "facebook"
+    channel: "facebook",
+    location: "inline" // "inline" or "footer" depending on button location
   }
 };
 
@@ -1013,6 +1059,52 @@ window.mkorsData.event.push(ddRemoveFromCartEvent);
 
 // Create and dispatch an event trigger (using predefined sendCustomEvent function)
 sendCustomEvent('removeFromCart');
+```
+
+## customEvent - Pick Up In Store Search
+
+```javascript
+// Pick Up In Store Search Example
+// create object with eventInfo and product object
+var ddPickUpInStoreSearchEvent = {
+  eventInfo: {
+    eventName: "pickUpInStoreSearch",
+    type: "search",
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed
+    }
+  },
+  product: [ // array of product objects
+    {
+      productID: "831879309",
+      pricePer: 145.0,
+      basePrice: 145.0,
+      priceType: "List", 
+      mfr: "Michael Kors",
+      mfrItemNum: "CB99A5G0UK",
+      upc: "888318793094",
+      isBaseItem: “true”,   
+      outfitID:	"28415181",
+      customized: “true”,  
+      gwp: "N", 
+      gwpSku: "", 
+      quantity: 1
+    }
+  ],
+  searchInfo: {
+    searchQuery: "98335",
+    storeID: "637",
+    storeName: "MICHAEL KORS TACOMA" // name of the store
+};
+
+// Push it onto the event array on mkorsData object
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddRemoveFromCartEvent);
+
+// Create and dispatch an event trigger (using predefined sendCustomEvent function)
+sendCustomEvent('pickUpInStoreSearch');
 ```
 
 ## customEvent - Add to Wishlist
@@ -1407,6 +1499,163 @@ sendCustomEvent("emailSubscriptionSuccess");
 **Notes:**
 The primary purpose of this custom event is to tell Launch that an email subscription activity succeeded. This is much more robust than just tracking a button click when the customer clicks, “Subscribe”. Launch will derive the context of the event (Lightbox, footer, et al) from other client-side information.
 
+## customEvent - Product Quantity Update
+Executed when the user initially increases or decreases item(s) in their cart.  
+
+This should not be called for the initial cart addition or a complete removal of the product from the cart. The add to cart and remove from cart events should continue to execute in those scenarios. 
+
+```javascript
+// Product Quantity Update Example
+// create object with eventInfo and product object
+var ddQtyUpdateEvent = {
+  eventInfo: {
+    eventName: "productQtyUpdate",
+    type: "increase", // increase or decrease depending on the scenario
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed
+    }
+  },
+  product: [ // array of product objects
+    {
+      productID: "831879309",
+      pricePer: "145.0",
+      basePrice: "145.0",
+      priceType: "List", 
+      mfr: "Michael Kors",
+      mfrItemNum: "CB99A5G0UK",
+      upc: "888318793094",
+      isBaseItem: "true",   
+      outfitID:	"28415181",
+      customized: "true",  
+      gwp: "N", 
+      gwpSku: "", 
+      quantity: 2, // the amount increased or decreased, not the final total
+      lookID: "",
+      engraved: "true", // "true" or "false" if the product is engraved
+      monogrammed: "false" // "true" or "false" if the product is monogrammed
+    }  
+  ]
+};
+
+// Push it onto the event array on mkorsData object
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddQtyUpdateEvent);
+
+// Create and dispatch an event trigger (using predefined sendCustomEvent function)
+sendCustomEvent('productQtyUpdate');
+```
+
+## customEvent - Promo Code Applied
+Executed when the user successfully applies a promo code.
+
+```javascript
+// Promo Code Example
+// create object with eventInfo and product object
+var ddPromoCodeEvent = {
+  eventInfo: {
+    eventName: "promoCodeApplied",
+    promoCode: "15OFF", // text value of the successful promo code
+    type: "checkout", 
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed
+    }
+  }
+};
+
+// Push it onto the event array on mkorsData object
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddPromoCodeEvent);
+
+// Create and dispatch an event trigger (using predefined sendCustomEvent function)
+sendCustomEvent('promoCodeSuccess');
+```
+
+## customEvent - Quantity Selection
+Executed on a product detail page and quick view when the user changes the quantity dropdown value.
+
+```javascript
+//Quantity Dropdown Change Example
+//create object with eventInfo and product object
+var ddQtyChangeEvent = {
+  eventInfo: {
+    eventName: "qtyDropdownChange",
+    selectionValue: "3", //the new value selected by the user
+    type: "product interaction",    
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false //Launch will change this to true once processed
+    }
+  },
+  product: [ //use an array even though this will most likely always be a single item
+    {
+      availability: "Y",
+      basePrice: "98.00",
+      colorCode: "TRUE NAVY",
+      mfr: "MICHAEL Michael Kors",
+      mfrItemNum: "MF98Z5M65N",
+      pricePer: "98.00",
+      priceType: "listPrice",
+      productID: "831879309",
+      sizeCode: "S",
+      upc: "888318793094"
+    }
+  ]
+};
+
+//Push it onto the event array on mkorsData object
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddQtyChangeEvent);
+
+//Create and dispatch an event trigger (using predefined sendCustomEvent function)
+sendCustomEvent("ddQtyChangeEvent");
+```
+
+## customEvent - Image Interaction
+Executed on a product detail page and quick view when the user interacts with the different image actions.
+
+```javascript
+//Image Interaction Example
+//create object with eventInfo and product object
+var ddImageInteractionEvent = {
+  eventInfo: {
+    eventName: "imgInteraction",
+    interactionType: "zoom", //action user takes on the images “scroll” OR “zoom” OR “click”
+    type: "product interaction",    
+    timeStamp: new Date(),
+    processed: {
+      adobeAnalytics: false // Launch will change this to true once processed
+    }
+  },
+  product: [ //use an array even though this will most likely always be a single item
+    {
+      availability: "Y",
+      basePrice: "98.00",
+      colorCode: "TRUE NAVY",
+      mfr: "MICHAEL Michael Kors",
+      mfrItemNum: "MF98Z5M65N",
+      pricePer: "98.00",
+      priceType: "listPrice",
+      productID: "831879309",
+      sizeCode: "S",
+      upc: "888318793094"
+    }
+  ]
+};
+
+//Push it onto the event array on mkorsData object
+window.mkorsData = window.mkorsData || {};
+window.mkorsData.event = window.mkorsData.event || [];
+window.mkorsData.event.push(ddImageInteractionEvent);
+
+//Create and dispatch an event trigger (using predefined sendCustomEvent function)
+sendCustomEvent("ddImageInteractionEvent");
+```
+
 ## customEvent - Errors
 Executed to support tracking of client-side exceptions. This event should be called when errors are presented as feedback to customer actions. A typical use case is when a customer has filled out a form and clicks “Continue” to submit the information or to go to the next step but the application indicates that there are some issues with the information entered. For instance, in the checkout flow, if the information entered for the shipping step fails validation, the user will be notified and directed to resolve the issue(s). 
 
@@ -1546,6 +1795,7 @@ sendCustomEvent("shopLocal");
 
 **Notes:** 
 The products in the smart bar should also contain query parameters leading to each product detail page. Example link:
+
 - https://www.michaelkors.com/blakely-leather-tote/_/R-US_30S8SZLT3L?color=1999&r8shoplocal=SITESECTION_STORECODE_SEARCHVALUE
 - https://www.michaelkors.com/blakely-leather-tote/_/R-US_30S8SZLT3L?color=1999&r8shoplocal=StoreLocator_3456_30019
 
@@ -1631,3 +1881,6 @@ Below is the polyfill, for the support of custom events on IE8 and IE9. This fil
 ```javascript
 window.Element&&window.Element.prototype.attachEvent&&!window.Element.prototype.addEventListener&&function(){function e(e,t){window.Window.prototype[e]=window.HTMLDocument.prototype[e]=window.Element.prototype[e]=t}function t(e){t.interval&&document.body&&(t.interval=clearInterval(t.interval),document.dispatchEvent(new CustomEvent("DOMContentLoaded")))}e("addEventListener",function(e,t){var n=this,o=n.addEventListener.listeners=n.addEventListener.listeners||{},r=o[e]=o[e]||[];r.length||n.attachEvent("on"+e,r.event=function(e){var t,o,a=n.document&&n.document.documentElement||n.documentElement||{scrollLeft:0,scrollTop:0},i=0,l=[].concat(r),c=!0,d=0;for(e.currentTarget=n,e.pageX=e.clientX+a.scrollLeft,e.pageY=e.clientY+a.scrollTop,e.preventDefault=function(){e.returnValue=!1},e.relatedTarget=e.fromElement||null,e.stopImmediatePropagation=function(){c=!1,e.cancelBubble=!0},e.stopPropagation=function(){e.cancelBubble=!0},e.target=e.srcElement||n,e.timeStamp=+new Date,i=0;c&&(t=l[i]);++i)for(d=0;o=r[d];++d)if(o===t){o.call(n,e);break}}),r.push(t)}),e("removeEventListener",function(e,t){var n,o,r=this,a=r.addEventListener.listeners=r.addEventListener.listeners||{},i=a[e]=a[e]||[];for(o=i.length-1;n=i[o];--o)if(n===t){i.splice(o,1);break}!i.length&&i.event&&r.detachEvent("on"+e,i.event)}),e("dispatchEvent",function(e){var t=this,n=e.type,o=t.addEventListener.listeners=t.addEventListener.listeners||{},r=o[n]=o[n]||[];try{return t.fireEvent("on"+n,e)}catch(a){return void(r.event&&r.event(e))}}),Object.defineProperty(Window.prototype,"CustomEvent",{get:function(){var e=this;return function(t,n){var o,r=e.document.createEventObject();r.type=t;for(o in n)"cancelable"===o?r.returnValue=!n.cancelable: "bubbles"===o?r.cancelBubble=!n.bubbles: "detail"===o&&(r.detail=n.detail);return r}}}),t.interval=setInterval(t,1),window.addEventListener("load",t)}(),(!this.CustomEvent||"object"==typeof this.CustomEvent)&&function(){this.CustomEvent=function(e,t){var n;t=t||{bubbles:!1,cancelable:!1,detail:void 0};try{n=document.createEvent("CustomEvent"),n.initCustomEvent(e,t.bubbles,t.cancelable,t.detail)}catch(o){n=document.createEvent("Event"),n.initEvent(e,t.bubbles,t.cancelable),n.detail=t.detail}return n}}();
 ```
+
+
+[product]: 
