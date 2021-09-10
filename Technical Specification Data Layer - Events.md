@@ -18,47 +18,47 @@ Search Discovery Inc.
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Data Layer Rendering and Timing Considerations](#data-layer-rendering-and-timing-considerations)
+    - [Data Layer Rendering and Timing Considerations](#data-layer-rendering-and-timing-considerations)
 - [Page Load Tracking](#page-load-tracking)
-  - [Page Load Tracking - All Pages](#page-load-tracking---all-pages)
-  - [Page Load - Product Detail Pages](#page-load---product-detail-pages)
-  - [Page Load - Product Listing Pages](#page-load---product-listing-pages)
-  - [Page Load - Shopping Cart Page](#page-load---shopping-cart-page)
-  - [Page Load - Checkout Pages](#page-load---checkout-pages)
-  - [Page Load - Order Confirmation Page](#page-load---order-confirmation-page)
+    - [Page Load Tracking - All Pages](#page-load-tracking---all-pages)
+    - [Page Load - Product Detail Pages](#page-load---product-detail-pages)
+    - [Page Load - Product Listing Pages](#page-load---product-listing-pages)
+    - [Page Load - Shopping Cart Page](#page-load---shopping-cart-page)
+    - [Page Load - Checkout Pages](#page-load---checkout-pages)
+    - [Page Load - Order Confirmation Page](#page-load---order-confirmation-page)
 - [Custom Events](#custom-events)
-  - [Event Information](#event-information)
-    - [Creating and Dispatching Custom Events](#creating-and-dispatching-custom-events)
-    - [Exposing Data to Launch](#exposing-data-to-launch)
-  - [customEvent - Quick View](#customevent---quick-view)
-  - [customEvent - Color Selection on PDP, QV, (and PLP in redesign)](#customevent---color-selection-on-pdp-qv-and-plp-in-redesign)
-  - [customEvent - Size Selection on PDP, QV](#customevent---size-selection-on-pdp-qv)
-  - [customEvent - Share Product](#customevent---share-product)
-  - [customEvent - PLP Refinements](#customevent---plp-refinements)
-  - [customEvent - Add to Cart](#customevent---add-to-cart)
-  - [customEvent - Remove from Cart](#customevent---remove-from-cart)
-  - [customEvent - Pick Up In Store Search](#customevent---pick-up-in-store-search)
-  - [customEvent - Add to Wishlist](#customevent---add-to-wishlist)
-  - [customEvent - Remove from Wishlist](#customevent---remove-from-wishlist)
-  - [customEvent - Add to Favorites (EU Only)](#customevent---add-to-favorites-eu-only)
-  - [customEvent - Remove from Favorites (EU Only)](#customevent---remove-from-favorites-eu-only)
-  - [customEvent - Sign In Success](#customevent---sign-in-success)
-  - [customEvent - Account Creation Success](#customevent---account-creation-success)
-  - [customEvent - Loyalty Sign Up Success](#customevent---loyalty-sign-up-success)
-  - [customEvent - Loyalty Opt Out Success](#customevent---loyalty-opt-out-success)
-  - [customEvent - Email Subscription Success](#customevent---email-subscription-success)
-  - [customEvent - Product Quantity Update](#customevent---product-quantity-update)
-  - [customEvent - Promo Code Applied](#customevent---promo-code-applied)
-  - [customEvent - Quantity Selection](#customevent---quantity-selection)
-  - [customEvent - Image Interaction](#customevent---image-interaction)
-  - [customEvent - Errors](#customevent---errors)
-  - [customEvent - Order Submit Errors](#customevent---order-submit-errors)
-  - [customEvent - Shop Local](#customevent---shop-local)
-  - [Single Page Applications – Page Change](#single-page-applications--page-change)
-  - [customEvent – Data Layer Complete](#customevent--data-layer-complete)
+    - [Event Information](#event-information)
+        - [Creating and Dispatching Custom Events](#creating-and-dispatching-custom-events)
+        - [Exposing Data to Launch](#exposing-data-to-launch)
+    - [customEvent - Quick View](#customevent---quick-view)
+    - [customEvent - Color Selection on PDP, QV, (and PLP in redesign)](#customevent---color-selection-on-pdp-qv-and-plp-in-redesign)
+    - [customEvent - Size Selection on PDP, QV](#customevent---size-selection-on-pdp-qv)
+    - [customEvent - Share Product](#customevent---share-product)
+    - [customEvent - PLP Refinements](#customevent---plp-refinements)
+    - [customEvent - Add to Cart](#customevent---add-to-cart)
+    - [customEvent - Remove from Cart](#customevent---remove-from-cart)
+    - [customEvent - Pick Up In Store Search](#customevent---pick-up-in-store-search)
+    - [customEvent - Add to Wishlist](#customevent---add-to-wishlist)
+    - [customEvent - Remove from Wishlist](#customevent---remove-from-wishlist)
+    - [customEvent - Add to Favorites (EU Only)](#customevent---add-to-favorites-eu-only)
+    - [customEvent - Remove from Favorites (EU Only)](#customevent---remove-from-favorites-eu-only)
+    - [customEvent - Sign In Success](#customevent---sign-in-success)
+    - [customEvent - Account Creation Success](#customevent---account-creation-success)
+    - [customEvent - Loyalty Sign Up Success](#customevent---loyalty-sign-up-success)
+    - [customEvent - Loyalty Opt Out Success](#customevent---loyalty-opt-out-success)
+    - [customEvent - Email Subscription Success](#customevent---email-subscription-success)
+    - [customEvent - Product Quantity Update](#customevent---product-quantity-update)
+    - [customEvent - Promo Code Applied](#customevent---promo-code-applied)
+    - [customEvent - Quantity Selection](#customevent---quantity-selection)
+    - [customEvent - Image Interaction](#customevent---image-interaction)
+    - [customEvent - Errors](#customevent---errors)
+    - [customEvent - Order Submit Errors](#customevent---order-submit-errors)
+    - [customEvent - Shop Local](#customevent---shop-local)
+    - [Single Page Applications – Page Change](#single-page-applications--page-change)
+    - [customEvent – Data Layer Complete](#customevent--data-layer-complete)
 - [Testing and Debugging](#testing-and-debugging)
 - [Appendix](#appendix)
-  - [IE8 event polyfill](#ie8-event-polyfill)
+    - [IE8 event polyfill](#ie8-event-polyfill)
 
 ***
 
@@ -70,7 +70,7 @@ This document outlines the specific changes requested of Michael Kors IT/Dev to 
 An assumption has also been made that there is already a data layer implemented according to the data layer documentation. As a result, this document is only focused on the event object and utilizing custom browser events to notify Launch that an event has occurred.
 
 ## Data Layer Rendering and Timing Considerations
-Where on the page should the data layer go and how should it be implemented? The general answer to this question is, “As close to the top of the document as possible, before the Adobe Launch embed, ideally within the `<head>` and as javascript within an inline `<script>` tag”. The broader answer is that the `mkorsData` object should be implemented so that it can be referenced at window scope and so that the data that it provides is there before it is needed.
+Where on the page should the data layer go and how should it be implemented? The general answer to this question is, “As close to the top of the document as possible, before the Adobe Launch embed, ideally within the `<head>` and as JavaScript within an inline `<script>` tag”. The broader answer is that the `mkorsData` object should be implemented so that it can be referenced at window scope and so that the data that it provides is there before it is needed.
 
 Any information that might be used by Adobe Launch as a rule condition should be rendered into the HTML page prior to the Adobe Launch header embed. This is typically the information in the `mkorsData.page` object as it is very common to set up rule conditions based on page type or category. Any information that is crucial for driving A/B testing or content targeting activities that need to happen as a part of page rendering should be included above the Adobe Launch header embed.
 
@@ -86,7 +86,7 @@ There is basic information that should be included in the digital data layer on 
 The best practice is to create this object in server side code, convert it to JSON, and include it in an in-line script tag of the HTML markup so that the actual `window.mkorsData` object is instantiated as the page renders in the client-side browser.
 
 Below is an example of the core `mkorsData` object that is expected on all website pages. 
-Note the absence of the tagConfig object; we no longer rely on this for Adobe Launch config. Also note the inclusion of the user object.
+Note the absence of the `tagConfig` object; we no longer rely on this for Adobe Launch config. Also note the inclusion of the user object.
 
 ```javascript
 // mkorsData page load info for all pages
@@ -127,7 +127,7 @@ window.mkorsData = {
 **Notes**
 
 1. `mkorsData.page.siteType` will have no purpose once the site is fully responsive and if the Destination Kors site goes away. Set to `responsive:ecommerce` for site redesign (PDP, PLP, SERP, Home).
-2. `mkorsData.page.responsiveView` is provided for site redesign to carry the responsive view of the page at the time it is loaded. The value might be XSmall, Small, Medium, or Large depending on how many responsive breakpoints there are.
+2. `mkorsData.page.responsiveView` is provided for site redesign to carry the responsive view of the page at the time it is loaded. The value might be `xsmall`, `small`, `medium`, or `large` depending on how many responsive breakpoints there are.
 3. See notes on the `hashedID` that are included in this document on the Sign In Success custom event. (md5 hash of trimmed, lowercased, email address)
 4. [ECB-13327](https://mk-jira.sparkred.com/browse/ECB-13327) Added `mkorsData.user[n].profile[n].profileInfo.applePayEnabled: /true|false/`
 
@@ -231,17 +231,33 @@ window.mkorsData = {
     }
   ],
   user: [
-    { /* object for carrying user info */ }
+    {
+      profile: [
+        {
+          profileInfo: {
+            applePayEnabled: "true" // true or false (added for ECB-13327)
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4", // sha256 hash of email address
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
+            type: "registered", // "guest", "registered", "loyalist"
+          }
+        }
+      ]
+    }
   ]
 }
 ```
+
 **Notes**
 
 1. The following objects have been removed (they are not in use today and have no planned use): 
   - `mkorsData.product.availability`
   - `mkorsData.product.qtyAvailable`
   - `mkorsData.product.description`
-2. The product object has been changed to an array of product objects so that we can support multiple products on a page in the future (perhaps Stylist driven outfits (i.e. The Look) which might be two or more primary products on a page).
+2. The `product` object has been changed to an array of `product` objects so that we can support multiple products on a page in the future (perhaps Stylist driven outfits (i.e. The Look) which might be two or more primary products on a page).
 3. This same data layer info will be expected upon the opening of a QuickView (See [QuickView](#customevents-quickview) in the custom events section of this document).
 4. The `crossSellGroup` array is added for the 2017 redesign as there may be multiple cross sell strategies use on PDP (or elsewhere).  Each cross sell strategy has a `crossSellGroup` object which includes info about the strategy, the number of products returned and an array of product objects each with a display index.
 5. `product[n].priceType` is requested for any primary products on page. Note that we presently scrape the DOM in Launch to determine price type.
@@ -249,6 +265,7 @@ window.mkorsData = {
 
 ## Page Load - Product Listing Pages
 Product Listing Pages include product listings as a result of category navigation as well as search results. When product listing pages are first loaded, a page data layer is created as shown below.  In most cases, we will have a result count, a default sort order and pagination information, but we will not have refinements already applied. However, it is assumed that we could have a page loaded with refinements applied as the result of a shared or bookmarked link or a page refresh. As such, the refinements array is included below.
+
 ```javascript
 // mkorsData page load info for PLP pages
 window.mkorsData = {
@@ -300,12 +317,30 @@ window.mkorsData = {
     query: "", // set to the search keyword if listing is a search result
     queryReplaced: "" // set to the replaced search keyword if listing is a search result
   },
-  user: [{ /*future object for carrying user info. Later in 2017.*/ }]
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            applePayEnabled: "true" // true or false (added for ECB-13327)
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4", // sha256 hash of email address
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
+            type: "registered", // "guest", "registered", "loyalist"
+          }
+        }
+      ]
+    }
+  ]
 }
 ```
+
 **Notes**
 
-It is desirable to have sorting and refinement information provided in English regardless of the end user’s language selection. Subsequent refinements or sort order selections after page load will be tracked via custom events (see customEvent - PLP Refinements).
+It is desirable to have sorting and refinement information provided in English regardless of the end user’s language selection. Subsequent refinements or sort order selections after page load will be tracked via custom events (see [customEvent - PLP Refinements](#customevent---plp-refinements)).
 
 ## Page Load - Shopping Cart Page
 The Shopping Cart Page will have the following data layer JSON object.
@@ -390,6 +425,24 @@ window.mkorsData = {
         }
       ]
     }
+  ],
+  user: [
+    {
+      profile: [
+        {
+          profileInfo: {
+            applePayEnabled: "true" // true or false (added for ECB-13327)
+            customerType: "Customer", // "Customer", "Employee", "Associate"
+            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
+            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4", // sha256 hash of email address
+            loginStatus: "logged In", // "logged in", "logged out"
+            // string indication of tier - set to "down" if 500 friends service is unavailable
+            loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
+            type: "registered", // "guest", "registered", "loyalist"
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -401,13 +454,14 @@ window.mkorsData = {
 3. The addition of “The Look” has added to the complexity.
 4. `priceType` by product has been on the list for inclusion for quite some time.
 5. I anticipate that shipping method (ship to store vs ship to address) will also be an ask from the analytics team.
-6. Present Launch code does not track crossSells shown at the bottom of the cart. An object is added here, matching the structure of crossSells on PDP.
+6. Present Launch code does not track `crossSells` shown at the bottom of the cart. An object is added here, matching the structure of `crossSells` on PDP.
 
 
 I would suggest that we have a discussion around what data exists in the application state about shopping carts and the products within? If we had this understanding, we could better advise the mapping to the data layer.
 
 ## Page Load - Checkout Pages
 The checkout pages will have the following data layer JSON object.
+
 ```javascript
 // mkorsData page load info for Shopping Cart page
 window.mkorsData = {
@@ -644,10 +698,11 @@ window.mkorsData = {
   ],
 };
 ```
+
 **Notes:** 
 1. At present Launch is scraping the DOM determine and set the `product[n].monogrammed` flag. It’s super fragile and WILL break.
-2. `mkorsData.transaction.product[2].pickupstoreid` is shown above to demonstrate how the pick up in store (Click & Collect) information may be passed.
-3. In the spec above, `transaction.product` is an array of product objects. This aligns with the rest of the data layer where we use an array of products (e.g. `addToBag` for custom items). The present (as of 9/2017) implementation of products within the transaction object is an “associative array” instead of an array object. In Launch we are looping through the associative array using
+2. `mkorsData.transaction.product[2].pickupstoreid` is shown above to demonstrate how the pick up in store (Click &amp; Collect) information may be passed.
+3. In the spec above, `transaction.product` is an array of product objects. This aligns with the rest of the data layer where we use an array of products (e.g. `addToBag` for custom items). The present (as of 9/2017) implementation of products within the `transaction` object is an “associative array” instead of an array object. In Launch we are looping through the associative array using
     ```javascript
     for (var i in mkorsData.transaction.product) {...}
     ```
@@ -1843,7 +1898,7 @@ sendCustomEvent("pageChange");
 ```
 
 ## customEvent – Data Layer Complete
-This example is provided for Michael Kors because the data layer does not currently exist in it’s complete form prior to Adobe Launch being embedded on the site or may not be able to be fully built prior to the Adobe Launch embed code in the future.
+This example is provided for Michael Kors because the data layer does not currently exist in its complete form prior to Adobe Launch being embedded on the site or may not be able to be fully built prior to the Adobe Launch embed code in the future.
 
 This event will notify Adobe Launch that all applicable components of the data layer have fully loaded, so Adobe Launch will know it’s safe to start evaluating rules for sending analytics or marketing vendor data. This event should be dispatched on every page load, whether it is a “traditional” page load or a SPA page change.
 
@@ -1879,6 +1934,3 @@ Below is the polyfill, for the support of custom events on IE8 and IE9. This fil
 ```javascript
 window.Element&&window.Element.prototype.attachEvent&&!window.Element.prototype.addEventListener&&function(){function e(e,t){window.Window.prototype[e]=window.HTMLDocument.prototype[e]=window.Element.prototype[e]=t}function t(e){t.interval&&document.body&&(t.interval=clearInterval(t.interval),document.dispatchEvent(new CustomEvent("DOMContentLoaded")))}e("addEventListener",function(e,t){var n=this,o=n.addEventListener.listeners=n.addEventListener.listeners||{},r=o[e]=o[e]||[];r.length||n.attachEvent("on"+e,r.event=function(e){var t,o,a=n.document&&n.document.documentElement||n.documentElement||{scrollLeft:0,scrollTop:0},i=0,l=[].concat(r),c=!0,d=0;for(e.currentTarget=n,e.pageX=e.clientX+a.scrollLeft,e.pageY=e.clientY+a.scrollTop,e.preventDefault=function(){e.returnValue=!1},e.relatedTarget=e.fromElement||null,e.stopImmediatePropagation=function(){c=!1,e.cancelBubble=!0},e.stopPropagation=function(){e.cancelBubble=!0},e.target=e.srcElement||n,e.timeStamp=+new Date,i=0;c&&(t=l[i]);++i)for(d=0;o=r[d];++d)if(o===t){o.call(n,e);break}}),r.push(t)}),e("removeEventListener",function(e,t){var n,o,r=this,a=r.addEventListener.listeners=r.addEventListener.listeners||{},i=a[e]=a[e]||[];for(o=i.length-1;n=i[o];--o)if(n===t){i.splice(o,1);break}!i.length&&i.event&&r.detachEvent("on"+e,i.event)}),e("dispatchEvent",function(e){var t=this,n=e.type,o=t.addEventListener.listeners=t.addEventListener.listeners||{},r=o[n]=o[n]||[];try{return t.fireEvent("on"+n,e)}catch(a){return void(r.event&&r.event(e))}}),Object.defineProperty(Window.prototype,"CustomEvent",{get:function(){var e=this;return function(t,n){var o,r=e.document.createEventObject();r.type=t;for(o in n)"cancelable"===o?r.returnValue=!n.cancelable: "bubbles"===o?r.cancelBubble=!n.bubbles: "detail"===o&&(r.detail=n.detail);return r}}}),t.interval=setInterval(t,1),window.addEventListener("load",t)}(),(!this.CustomEvent||"object"==typeof this.CustomEvent)&&function(){this.CustomEvent=function(e,t){var n;t=t||{bubbles:!1,cancelable:!1,detail:void 0};try{n=document.createEvent("CustomEvent"),n.initCustomEvent(e,t.bubbles,t.cancelable,t.detail)}catch(o){n=document.createEvent("Event"),n.initEvent(e,t.bubbles,t.cancelable),n.detail=t.detail}return n}}();
 ```
-
-
-[product]: 
