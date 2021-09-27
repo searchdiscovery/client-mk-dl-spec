@@ -9,38 +9,36 @@ window.appEventData = window.appEventData || [];
 
 appEventData.push({
   "event": "Quick View",
-  "cart": {
-    "item": [
-      {
-        basePrice: 445.0,
-        categoryID: "cat20099",
-        categoryName: "NEW ARRIVALS",
-        customized: false
-        gwp: "N",
-        gwpSku: "",
-        mfr: "Michael Kors Studio",
-        mfrItemNum: "30H6SOAL2L",
-        pricePer: 598.0,
-        priceType: "Markdown",
-        productID: "4952115",
-        upc: "190049521151",
-      }
-    ]
-  }
+  "product": [
+    {
+      "basePrice": 445.0,
+      "categoryID": "cat20099",
+      "categoryName": "NEW ARRIVALS",
+      "customized": false,
+      "gwp": "N",
+      "gwpSku": "",
+      "mfr": "Michael Kors Studio",
+      "mfrItemNum": "30H6SOAL2L",
+      "pricePer": 598.0,
+      "priceType": "Markdown",
+      "productID": "4952115",
+      "upc": "190049521151"
+    }
+  ]
 });
 ```
 
 |Field|Type|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
 |-----|----|-----------|--------|-------|----------|----------|---|---|-----------|
-|basePrice|string|Base unit price of item||||||||
-|categoryID|string|SFCC category ID|cat20009|||||||
-|categoryName|string|Name of category|NEW ARRIVALS|||||||
-|customized|boolean|Universal purchase code ID||||||||
-|gwp|string||N|||||||
+|basePrice|float|Base unit price of item|`445.0`|||||||
+|categoryID|string|SFCC category ID|`"cat20009"`|||||||
+|categoryName|string|Name of category|`"NEW ARRIVALS"`|||||||
+|customized|boolean|Whether or not the item has been customized|`true`<br>`false`|||||||
+|gwp|string||`"N"`|||||||
 |gwpSku|string|||||||||
 |mfr|string|Manufacturer of the item||||||||
 |mfrItemNum|string|ID used by manufacturer||||||||
-|pricePer|string|Displayed unit price of item||||||||
+|pricePer|float|Displayed unit price of item||||||||
 |priceType|string|Type of price displayed to user|Markdown|||||||
 |productID|string|Product ID|4952115|||||||
 |upc|string|Universal purchase code ID||||||||
