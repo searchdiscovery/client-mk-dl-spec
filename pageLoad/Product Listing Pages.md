@@ -49,22 +49,21 @@ window.mkorsData = {
       pageNum: 1,
       pageCount: 5
     },
-    query: "", // set to the search keyword if listing is a search result
-    queryReplaced: "" // set to the replaced search keyword if listing is a search result
+    query: "",
+    queryReplaced: ""
   },
   user: [
     {
       profile: [
         {
           profileInfo: {
-            applePayEnabled: "true" // true or false (added for ECB-13327)
-            customerType: "Customer", // "Customer", "Employee", "Associate"
-            hashedID: "7ddb5eae16468674b843f396b335a7dd", // md5 hash of email address
-            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4", // sha256 hash of email address
-            loginStatus: "logged In", // "logged in", "logged out"
-            // string indication of tier - set to "down" if 500 friends service is unavailable
-            loyaltyTier: "studio", // "backstage", "runway", "red carpet", "non-loyalty"
-            type: "registered", // "guest", "registered", "loyalist"
+            applePayEnabled: true,
+            customerType: "customer",
+            hashedID: "7ddb5eae16468674b843f396b335a7dd",
+            hashedID2: "jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4",
+            loginStatus: "logged_in",
+            loyaltyTier: "studio",
+            type: "registered"
           }
         }
       ]

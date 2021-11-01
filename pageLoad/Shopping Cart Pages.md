@@ -167,7 +167,7 @@ The members of the Cross Sell Group array are subsets of the `product` object.
 |mfrItemNum|string|ID used by manufacturer||||||||
 |productID|string|Product ID|`"4952115"`|||||||
 
-**Notes:** 
+## Notes
 
 1. Present Launch page load is scraping the DOM to align price info with products in the data layer. It’s super fragile and WILL break.
 2. The addition of Kors Custom items (with `baseItems` and outfit groupings) has made the DOM scraping more difficult and trouble prone.
