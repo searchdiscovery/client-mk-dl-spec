@@ -1,4 +1,4 @@
-## customEvent - Size Selection on PDP, QV
+# Size Selection
 Executed anywhere the user chooses to select the size of a product. This can happen from product detail pages and quickview pages on the site.
 
 ```javascript
@@ -37,6 +37,15 @@ window.mkorsData.event.push(ddSizeSelectionEvent);
 sendCustomEvent("sizeSelection");
 ```
 
+## Event Info Properties
+|Field|Type|Required|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
+|-----|----|--------|-----------|--------|-------|----------|----------|---|---|-----------|
+|eventName|string|Yes|The name of the event|`"sizeSelection"`|||||||
+|type|string|Yes|The event type|`"product interaction"`|||||||
+|timeStamp|string|Yes|ISO-8601 Extended Format date|`"2021-11-05T20:22:02.707Z"`|||||||
+|processed|object|Yes|Contains one property, `adobeAnalytics`, always set to `false` by application, which is updated by Launch upon processing|`false`|||||||
+
+## Product Properties
 |Field|Type|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
 |-----|----|-----------|--------|-------|----------|----------|---|---|-----------|
 |availability|string|Whether or not the item is in stock|`"y"`, `"n"`|||||||

@@ -1,6 +1,7 @@
 # Custom Events
 ## Event Information
 The event array will be a collection of events that occur during a user’s interaction with the web application. In order to standardize the triggers for user interactions with the application, we have followed the specification for events to be included in the JSO. This will allow Launch to gather data as needed without additional DOM searching or other methods. The following is an example of the events object:
+
 ```javascript
 mkorsData.event: [
   {
@@ -13,6 +14,7 @@ mkorsData.event: [
   }
 ]
 ```
+
 ### Creating and Dispatching Custom Events
 Launch will listen for custom browser events to occur, and fire corresponding rules to send necessary data to analytics platforms and/or marketing pixel vendors.
 
@@ -29,7 +31,7 @@ Browser support:
 
 This solution does not support IE6 or IE7.
 
-**Javascript:** Since different browsers handle custom event dispatching differently, this solution checks for certain functionality in order to ensure cross browser compatibility. For custom event support in IE8 and IE9, a polyfill is required.
+**Javascript:** Since different browsers handle custom event dispatching differently, this solution uses feature detection to check for certain functionality in order to ensure cross browser compatibility. For custom event support in IE8 and IE9, a polyfill is required.
 
 The polyfill script (see appendix for source) should be included similar to this example:
 ```html
