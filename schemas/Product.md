@@ -35,6 +35,7 @@ window.mkorsData = {
       mfr: "<mfr>",
       mfrItemNum: "<mfrItemNum>",
       name: "<name>",
+      outfitID: "<outfitID>",
       pickUpInStore: "<pickUpInStore>",
       pickUpStoreID: "<pickUpInStore>",
       pickUpStoreName: "<pickUpStoreName>",
@@ -57,7 +58,6 @@ window.mkorsData = {
 |basePrice|number|Yes|Base unit price of item|`445.0`|
 |categoryID|string|Yes|SFCC category ID|`"cat20009"`|
 |categoryName|string|Yes|Name of category|`"new_arrivals"`|
-|customized|boolean|Yes|Whether or not the item has been customized|`true`, `false`|
 |color|string|Only if the product has a color choice|Color code|`"black"`|
 |crossSellCartridge|string|?|?|
 |customized|boolean|Yes|Whether or not the item has been customized|`true`, `false`|

@@ -41,7 +41,7 @@ sendCustomEvent("shareProduct");
 |eventName|string|Yes|The name of the event|`"shareProduct"`|||||||
 |type|string|Yes|The event type|`"product interaction"`|||||||
 |timeStamp|string|Yes|ISO-8601 Extended Format date|`"2021-11-05T20:22:02.707Z"`|||||||
-|processed|string|Yes|Contains one property, `adobeAnalytics`, always set to `false` by application, but which is updated by Launch upon processing|`false`|||||||
+|processed|object|Yes|Contains one property, `adobeAnalytics`, always set to `false` by application, but which is updated by Launch upon processing|`false`|||||||
 
 ## Product Properties
 |Field|Type|Required|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
