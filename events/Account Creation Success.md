@@ -63,6 +63,7 @@ The `profile` array contains objects which describe one or more profiles associa
 |-----|----|-----------|--------|-------|----------|----------|---|---|-----------|---|
 |applePayEnabled|boolean|Yes if logged in|Whether or not the user has Apple Pay enabled|`true`, `false`|
 |customerType|string|Yes if logged in|Customer type|`"customer"`, `"employee"`, `"associate"`|
+|emailOptIn|boolean|Yes if logged in|Whether the user has confirmed email opt in|`true`, `false`|
 |hashedID|string|Yes if logged in|md5 hash of email address|`"7ddb5eae16468674b843f396b335a7dd"`|
 |hashedID2|string|Yes if logged in|sha256 hash of email address|`"jknhjbebgo8y5oy6obv7b6bo8wowobv8757384ybof87bv5g4"`|
 |loginStatus|string|Yes|Customer login status|`"logged_in"`, `"logged_out"`|
@@ -70,4 +71,4 @@ The `profile` array contains objects which describe one or more profiles associa
 |type|string|Yes|User type|`"guest"`, `"registered"`, `"loyalist"`|
 
 ## Notes
-hashedID in the `user[n].profile[n]` object is a one-way hash of the customer’s email address. See notes on customEvent - Sign In Success for more details on this field.emailOptIn is set to indicate whether the newly registered customer chose to opt in to email newsletters or not.
+`hashedID`s in the `user[n].profile[n]` object are one-way hashes of the customer’s email address. See notes on [Sign In Success](/events/Sign%20In%20Success.md) for more details on this field.
