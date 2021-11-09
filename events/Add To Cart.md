@@ -17,8 +17,9 @@ var ddAddToCartEvent = {
   },
   product: [
     {
-      basePrice: 198.00,
+      basePrice: 198.0,
       crossSellCartridge: "",
+      engraved: true,
       gwp: false,
       gwpSku: "",
       isBaseItem: true,
@@ -26,16 +27,12 @@ var ddAddToCartEvent = {
       lookID: "",
       mfr: "MICHAEL Michael Kors",
       mfrItemNum: "32T9UF5C2Y",
-      pricePer: 198.00,
+      monogrammed: false,
+      pricePer: 198.0,
       priceType: "list",
       productID: "287781019",
       quantity: 1,
-      shippingMethod: "pickup",
-      storeID: "637",
       upc: "192877810193",
-      storeName: "MICHAEL KORS TACOMA", // when added to pick up in store
-      engraved: true,
-      monogrammed: false
     }
   ]
 };
@@ -52,8 +49,9 @@ sendCustomEvent('addToCart');
 ## Event Info Properties
 |Field|Type|Required|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
 |-----|----|--------|-----------|--------|-------|----------|----------|---|---|-----------|
-|eventName|string|Yes|The name of the event|`"shareProduct"`|
-|type|string|Yes|The event type|`"product interaction"`|
+|eventName|string|Yes|The name of the event|`"addToCart"`|
+|type|string|Yes|The event type|`"cart"`|
+|orderType|string|Yes|The order type|`"regular"`|
 |timeStamp|string|Yes|ISO-8601 Extended Format date|`"2021-11-05T20:22:02.707Z"`|
 |processed|object|Yes|Contains one property, `adobeAnalytics`, always set to `false` by application, but which is updated by Launch upon processing|`false`|
 
@@ -62,14 +60,17 @@ sendCustomEvent('addToCart');
 |-----|----|--------|-----------|--------|-------|----------|----------|---|---|-----------|
 |basePrice|number|Yes|Base unit price of item|`445.0`|
 |crossSellCartridge|string|?|?|
+|engraved|boolean|If available|Whether or not the customer added an engraving|`true`, `false`|
 |gwp|boolean|?|?|`true`, `false`
 |gwpSku|string|?|?|
+|isBaseItem|boolean||Whether the item is the base item|`true`, `false`|
 |isCrossSell|boolean|Yes|Whether or not the item is cross sell eligible|`true`, `false`|
 |lookID|string|If available|Look ID|
 |mfr|string|Yes|Manufacturer of the item|`michael kors`|
 |mfrItemNum|string|Yes|ID used by manufacturer||
-|pricePer|number|Yes|Displayed unit price of item|`445.00`|
+|monogrammed|boolean|If available|Whether the item has had a monogram added to it|`true`, `false`|
+|pricePer|number|Yes|Displayed unit price of item|`445.0`|
 |priceType|string|Yes|Type of price displayed to user|`"list"`, `"markdown"`|
 |productID|string|Yes|Product ID|`"4952115"`|
-|size|string|Only if product has a size choice|Size code|`"large"`, `"12"`|
+|quantity|number|No|How many of the item were added to the cart|`1`|
 |upc|string|Yes|Universal purchase code ID|
