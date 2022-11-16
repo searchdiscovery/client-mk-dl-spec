@@ -1,0 +1,29 @@
+site_name: Michael Kors Alta Data Layer Spec
+repo_url: https://github.com/searchdiscovery/client-mk-dl-spec
+repo_name: searchdiscovery/client-mk-dl-spec
+edit_uri: edit/main/
+theme:
+  name: material
+  palette:
+    primary: black
+  features:
+    - content.code.annotate
+    - navigation.expand
+    - navigation.instant
+    - navigation.indexes
+    - navigation.sections
+    - toc.follow
+markdown_extensions:
+  - admonition
+  - meta
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+plugins:
+  - search
+extra:
+  version:
+    provider: mike
+dev_addr: '0.0.0.0:8080'
