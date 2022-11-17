@@ -1,3 +1,7 @@
+---
+title: Loyalty Sign Up Success
+---
+
 # Loyalty Sign Up Success
 Executed when an existing registered customer successfully joins the loyalty program. 
 

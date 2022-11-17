@@ -49,6 +49,25 @@ nav:
     - events/addToWishlist.md
     - events/colorSelection.md
     - events/dataLayerComplete.md
+    - events/emailSubscriptionSuccess.md
+    - events/errorEvent.md
+    - events/errorEventOrderSubmit.md
+    - events/imageInteraction.md
+    - events/loyaltyOptOutSuccess.md
+    - events/loyaltySignupSuccess.md
+    - events/pageChange.md
+    - events/pickUpInStoreSearch.md
+    - events/productQtyUpdate.md
+    - events/promoCodeApplied.md
+    - events/qtyDropdownChange.md
+    - events/quickView.md
+    - events/refinementApplied.md
+    - events/removeFromCart.md
+    - events/removeFromWishlist.md
+    - events/shareProduct.md
+    - events/shopLocal.md
+    - events/signInSuccess.md
+    - events/sizeSelection.md
   - Schemas:
     - schemas/index.md
     - schemas/page.md
