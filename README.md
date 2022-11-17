@@ -12,7 +12,7 @@ Deploys data layer docs to GitHub pages.
   ```
 3. Run it
   ```shell
-  docker run --rm -it -p 8080:8080 -v ${PWD}:/docs tyssejc/mkdocs-material
+  docker run --rm -it -p 8080:8080 -v ${PWD}:/docs ghcr.io/tyssejc/mkdocs-material
   ```
 
 ### Python
