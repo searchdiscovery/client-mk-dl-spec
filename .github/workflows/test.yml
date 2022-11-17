@@ -1,0 +1,32 @@
+name: Build Image
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  publish_docker:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          version: latest
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          push: false
+          tags: |
+            ghcr.io/${{ github.event.repository.full_name }}:latest
