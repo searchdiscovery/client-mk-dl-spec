@@ -87,9 +87,10 @@ window.mkorsData = {
 ```
 
 ## Page Properties
-|Field|Type|Required|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
-|-----|----|--------|---|--------|-------|----------|----------|---|---|-----------|
-|breadcrumb|string|Yes|Path to current page|`"/sloan-tango-small-quilted-leather-shoulder-bag/_/R-US_12AB34CD56EF"`|
+
+|Field|Type|Required|Description|Examples|
+|-----|----|--------|-----------|-------|
+|**breadcrumb**|string|Yes|Path to current page|`"/sloan-tango-small-quilted-leather-shoulder-bag/_/R-US_12AB34CD56EF"`|
 |channel|string|Yes|Marketing channel|`"HANDBAGS"`|
 |countryLanguage|string|Yes|i18n language|`"US:en"`|
 |name|string|Yes|Name of current page|`"Home > HANDBAGS > SHOULDER BAGS > SloanTangoSmallQuilted-LeatherShoulderBag"`|
@@ -102,8 +103,8 @@ window.mkorsData = {
 |type|string|Yes|Type of page|`"Home Page"`|
 
 ## Product Properties
-|Field|Type|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
-|-----|----|-----------|--------|-------|----------|----------|---|---|-----------|
+|Field|Type|Description|Examples|
+|-----|----|-----------|--------|
 |basePrice|number|Base unit price of item|`445.0`|
 |categoryID|string|SFCC category ID|`"cat20009"`|
 |categoryName|string|Name of category|`"NEW ARRIVALS"`|
@@ -129,8 +130,8 @@ window.mkorsData = {
 ### SKU Variants Array
 The SKU Variants array contains objects which have a subset of Product properties, and which describe variants of the displayed product. For example, if a pair of boots is available in multiple colors, the default information is loaded in the main `products` object, and details about variants are loaded as objects in the `SkuVariants` array.
 
-|Field|Type|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
-|-----|----|-----------|--------|-------|----------|----------|---|---|-----------|
+|Field|Type|Description|Examples|
+|-----|----|-----------|--------|
 |basePrice|number|Base unit price of item|`445.0`||||0.00|||
 |color|string|Color code|`"BLACK"`, `"RED/BROWN"`|
 |pricePer|number|Displayed unit price of item|`445.0`|
@@ -139,15 +140,17 @@ The SKU Variants array contains objects which have a subset of Product propertie
 |size|string|Size code|`"ONE SIZE"`, `"LARGE"`, `"12"`|
 
 ## Cross Sell Group Properties
-|Field|Type|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
-|-----|----|-----------|--------|-------|----------|----------|---|---|-----------|
+
+|Field|Type|Description|Examples|
+|-----|----|-----------|--------|
 |productCount|string|Number of products in the group|`"3"`|
 |strategy|string|Cross sell strategy used|`"We Think You Will Love"`, `"Recently Viewed"`|
 
 ### Cross Sell Group Product Properties
 The members of the Cross Sell Group array are subsets of the `product` object.
-|Field|Type|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
-|-----|----|-----------|--------|-------|----------|----------|---|---|-----------|
+
+|Field|Type|Description|Examples|
+|-----|----|-----------|--------|
 |displayIndex|integer|Order in which the item was displayed|`0`, `1`, `2`|
 |mfr|string|Manufacturer of the item||
 |mfrItemNum|string|ID used by manufacturer||

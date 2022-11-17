@@ -1,7 +1,9 @@
 site_name: Michael Kors Alta Data Layer Spec
 repo_url: https://github.com/searchdiscovery/client-mk-dl-spec
 repo_name: searchdiscovery/client-mk-dl-spec
-edit_uri: edit/main/
+edit_uri: edit/main/docs/
+extra_css:
+  - css/extra.css
 theme:
   name: material
   palette:
@@ -12,9 +14,12 @@ theme:
     - navigation.instant
     - navigation.indexes
     - navigation.sections
+    - navigation.tabs
     - toc.follow
 markdown_extensions:
   - admonition
+  - attr_list
+  - md_in_html
   - meta
   - pymdownx.highlight:
       anchor_linenums: true
@@ -27,3 +32,25 @@ extra:
   version:
     provider: mike
 dev_addr: '0.0.0.0:8080'
+nav:
+  - Home: index.md
+  - Page Load Tracking:
+    - page-load/index.md
+    - page-load/allPages.md
+    - page-load/productListingPages.md
+    - page-load/productDetailPages.md
+    - page-load/shoppingCartPages.md
+    - page-load/checkoutPages.md
+    - page-load/orderConfirmationPage.md
+  - Custom Event Tracking:
+    - events/index.md
+    - events/accountCreationSuccess.md
+    - events/addToCart.md
+    - events/addToWishlist.md
+    - events/colorSelection.md
+    - events/dataLayerComplete.md
+  - Schemas:
+    - schemas/index.md
+    - schemas/page.md
+    - schemas/product.md
+    - schemas/user.md

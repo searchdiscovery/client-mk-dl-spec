@@ -1,5 +1,8 @@
 ---
-title: Getting Started
+title: Home
+hide:
+  - navigation
+  - toc
 ---
 
 ![SDI logo](https://lh5.googleusercontent.com/qISy6cadFd9w5RbPc1eqZj7SISc844g8KRXSeM2P07h1PvkDJbpVtE--xNttLLSvlklK7e5dr52fGGuTGQZ19CqrLeg0dr7UuisKnKUK0xxs6IP8LfnsPMkBkfLeQfUMABH-cJn7=s0)

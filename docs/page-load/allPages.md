@@ -43,19 +43,20 @@ window.mkorsData = {
 ```
 
 ## Page Properties
-|Field|Type|Required|Description|Examples|Pattern|Min Length|Max Length|Min|Max|Multiple Of|
-|-----|----|--------|---|--------|-------|----------|----------|---|---|-----------|
-|breadcrumb|string|Yes|Path to current page|`"/sloan-tango-small-quilted-leather-shoulder-bag/_/R-US_12AB34CD56EF"`|||||||
-|channel|string|Yes|Marketing channel|`"HANDBAGS"`|||||||
-|countryLanguage|string|Yes|i18n language|`"US:en"`|||||||
-|name|string|Yes|Name of current page|`"Home > HANDBAGS > SHOULDER BAGS > SloanTangoSmallQuilted-LeatherShoulderBag"`|||||||
-|navigation|string|No|Global navigation path|`"MK:Top Nav > WOMEN > HANDBAGS > SHOULDER BAGS"`|||||||
-|region|string|Yes|Geographic region|`"NA"`, `"EU"`|||||||
-|responsiveView|string|Yes|Responsive view size|`"xsmall"`, `"small"`, `"medium"`, `"large"`|||||||
-|siteSectionLevel2|string|No||`"Home > HANDBAGS"`|||||||
-|siteSectionLevel3|string|No||`"Home > HANDBAGS > SHOULDER BAGS > SloanTangoSmallQuilted-LeatherShoulderBag"`|||||||
-|siteType|string|No|Legacy site type|`"responsive:ecommerce"`|||||||
-|type|string|Yes|Type of page|`"Home Page"`|||||||
+
+|Field|Type|Required|Description|Examples|
+|-----|----|--------|------------|-------|
+|breadcrumb|string|Yes|Path to current page|`"/sloan-tango-small-quilted-leather-shoulder-bag/_/R-US_12AB34CD56EF"`|
+|channel|string|Yes|Marketing channel|`"HANDBAGS"`|
+|countryLanguage|string|Yes|i18n language|`"US:en"`|
+|name|string|Yes|Name of current page|`"Home > HANDBAGS > SHOULDER BAGS > SloanTangoSmallQuilted-LeatherShoulderBag"`|
+|navigation|string|No|Global navigation path|`"MK:Top Nav > WOMEN > HANDBAGS > SHOULDER BAGS"`|
+|region|string|Yes|Geographic region|`"NA"`, `"EU"`|
+|responsiveView|string|Yes|Responsive view size|`"xsmall"`, `"small"`, `"medium"`, `"large"`|
+|siteSectionLevel2|string|No||`"Home > HANDBAGS"`|
+|siteSectionLevel3|string|No||`"Home > HANDBAGS > SHOULDER BAGS > SloanTangoSmallQuilted-LeatherShoulderBag"`|
+|siteType|string|No|Legacy site type|`"responsive:ecommerce"`|
+|type|string|Yes|Type of page|`"Home Page"`|
 
 
 ## Notes
