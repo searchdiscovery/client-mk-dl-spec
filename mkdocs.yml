@@ -10,6 +10,7 @@ theme:
     primary: black
   features:
     - content.code.annotate
+    - content.action.edit
     - navigation.expand
     - navigation.instant
     - navigation.indexes
