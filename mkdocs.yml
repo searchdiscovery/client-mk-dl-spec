@@ -29,6 +29,7 @@ markdown_extensions:
   - pymdownx.superfences
 plugins:
   - search
+  - git-revision-date
 extra:
   version:
     provider: mike
